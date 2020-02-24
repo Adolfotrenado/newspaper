@@ -1,0 +1,12 @@
+.cardBody {
+  height: 280px;
+}
+
+.buttonRead {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+}
+input[type="radio"] {
+  display: none;
+}

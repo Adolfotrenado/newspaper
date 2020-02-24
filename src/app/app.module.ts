@@ -1,16 +1,28 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { BrowserModule } from "@angular/platform-browser";
+import { NgModule } from "@angular/core";
+import { HttpClientModule } from "@angular/common/http";
+import { AppComponent } from "./app.component";
+import { TitularesComponent } from "./titulares/titulares.component";
+import { ArticuloComponent } from "./articulo/articulo.component";
+import { DataService } from "./services/data.service";
+import { Routes, RouterModule } from "@angular/router";
+import { FormsModule } from "@angular/forms";
 
-import { AppComponent } from './app.component';
+const RouterConfig: Routes = [
+  { path: "", component: TitularesComponent },
+  { path: "titulares", component: TitularesComponent },
+  { path: "articulo/:id", component: ArticuloComponent }
+];
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent, TitularesComponent, ArticuloComponent],
   imports: [
-    BrowserModule
+    BrowserModule,
+    HttpClientModule,
+    RouterModule.forRoot(RouterConfig, { useHash: true }),
+    FormsModule
   ],
-  providers: [],
+  providers: [DataService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

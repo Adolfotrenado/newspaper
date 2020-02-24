@@ -1,0 +1,153 @@
+<div class="container">
+  <div class="text-center mt-3 mb-3">
+    <h1>Newspaper project</h1>
+    <p>Search today's top news</p>
+    <button
+      type="button"
+      class="btn btn-success"
+      data-toggle="modal"
+      data-target="#searchModal"
+    >
+      Search
+    </button>
+  </div>
+  <div class="row mt-3">
+    <div
+      *ngFor="let data of _data.dataFiltered; let i = index"
+      class="col-12 col-md-6 col-lg-4 mt-3"
+    >
+      <div class="card" style="width: 18rem;">
+        <img
+          class="card-img-top"
+          src="{{ _data.dataFiltered[i]['urlToImage'] }}"
+          height="200px"
+        />
+        <div class="card-body cardBody row">
+          <h5 class="card-title">
+            {{ _data.dataFiltered[i]["source"] }}
+          </h5>
+          <p class="card-text">
+            {{ _data.dataFiltered[i]["description"] }}
+          </p>
+          <a routerLink="/articulo/{{ i }}" class="btn btn-primary buttonRead">
+            Read more...
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="searchModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="searchModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="searchModalLabel">
+          Search today's top news
+        </h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- Category filter engine -->
+
+        <h3 class="text-center">Filter by Category</h3>
+        <form
+          #categoryForm="ngForm"
+          (ngSubmit)="filterNews()"
+          class="row"
+          id="modalForm"
+        >
+          <div
+            *ngFor="let category of categoryList; let i = index"
+            [ngClass]="{ 'offset-4': i === categoryList.length - 1 }"
+            class="col-4 mt-3"
+          >
+            <input
+              type="radio"
+              name="selectCategory"
+              value="{{ categoryList[i] }}"
+              checked="{{ checked[i] ? 'checked' : '' }}"
+            />
+            <button
+              *ngIf="!checked[i]; else activatedCheck"
+              type="button"
+              class="btn btn-outline-success btn-block"
+              (click)="categoryCheck(i)"
+            >
+              {{ categoryList[i] }}
+            </button>
+            <ng-template #activatedCheck
+              ><button class="btn btn-success btn-block" *ngIf="checked[i]">
+                {{ categoryList[i] }}
+              </button></ng-template
+            >
+          </div>
+          <!-- Order by engine -->
+
+          <h3 class="text-center col-12 mt-3">Order by</h3>
+          <div
+            *ngFor="let order of orderList; let i = index"
+            class="col-6 mt-3"
+          >
+            <input
+              type="radio"
+              name="selectOrder"
+              checked="{{ selected[i] ? 'checked' : '' }}"
+              value="{{ orderList[i] }}"
+            />
+            <button
+              *ngIf="!selected[i]; else activatedSelect"
+              type="button"
+              class="btn btn-outline-success btn-block"
+              (click)="orderSelect(i)"
+            >
+              {{ orderList[i] }}
+            </button>
+            <ng-template #activatedSelect
+              ><button class="btn btn-success btn-block" *ngIf="selected[i]">
+                {{ orderList[i] }}
+              </button></ng-template
+            >
+          </div>
+          <div class="form-group col-12 mt-3">
+            <h3 class="text-center" for="searchTermInput">Search by term</h3>
+            <input
+              type="text"
+              class="form-control"
+              id="searchTermInput"
+              placeholder="Enter your search"
+              name="termInput"
+              [(ngModel)]="searchInputValue"
+            />
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+          Close
+        </button>
+        <input
+          type="submit"
+          class="btn btn-primary"
+          form="modalForm"
+          value="Search"
+          onclick='$(".modal").modal("hide")'
+        />
+      </div>
+    </div>
+  </div>
+</div>

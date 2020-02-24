@@ -1,0 +1,11 @@
+<div class="container text-center"></div>
+<img src="{{ _data.dataFiltered[param]['urlToImage'] }}" height="800px" />
+<h1>{{ _data.dataFiltered[param]["title"] }}</h1>
+<p>{{ _data.dataFiltered[param]["description"] }}</p>
+<a routerLink="/" class="btn btn-danger">Go Back</a>
+<a
+  href="{{ _data.dataFiltered[param]['url'] }}"
+  class="btn btn-primary"
+  target="_blank"
+  >Read source...</a
+>
