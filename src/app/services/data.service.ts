@@ -13,7 +13,7 @@ export class DataService {
   get() {
     this._http
       .get(
-        `http://cors-anywhere.herokuapp.com/http://newsapi.org/v2/top-headlines?country=us&pageSize=100&apiKey=a1d728d0e76746ddbbd39b75bdf7020d`
+        `https://cors-anywhere.herokuapp.com/https://newsapi.org/v2/top-headlines?country=us&pageSize=100&apiKey=a1d728d0e76746ddbbd39b75bdf7020d`
       )
       .subscribe(responseAPI => {
         this.dataFiltered = [];
@@ -36,7 +36,7 @@ export class DataService {
   getFilteredSearch(order: string, category: string, searchInputValue: string) {
     this._http
       .get(
-        `http://cors-anywhere.herokuapp.com/http://newsapi.org/v2/top-headlines?country=us&pageSize=100${order}${category}${searchInputValue}&apiKey=a1d728d0e76746ddbbd39b75bdf7020d`
+        `https://cors-anywhere.herokuapp.com/https://newsapi.org/v2/top-headlines?country=us&pageSize=100${order}${category}${searchInputValue}&apiKey=a1d728d0e76746ddbbd39b75bdf7020d`
       )
       .subscribe(responseAPI => {
         this.dataFiltered = [];
